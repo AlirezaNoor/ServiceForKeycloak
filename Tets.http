@@ -1,0 +1,6 @@
+@Tets_HostAddress = http://localhost:5294
+
+GET {{Tets_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

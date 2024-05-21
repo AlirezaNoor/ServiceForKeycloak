@@ -49,17 +49,25 @@ public class WeatherForecastController : ControllerBase
 
         try
         {
+            // Reading the JWT token without validation for the purpose of extracting claims
             var jwtToken = tokenHandler.ReadJwtToken(token);
 
+            // Display all claims for debugging purposes
+            var allClaims = jwtToken.Claims.Select(c => new { c.Type, c.Value });
+
+            // Find specific claims
             var username = jwtToken.Claims.FirstOrDefault(c => c.Type == "preferred_username")?.Value;
-            // var email = jwtToken.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
-            // var roles = jwtToken.Claims.FirstOrDefault(c => c.Type == "realm_access")?.Value;
+            var name = jwtToken.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
+            var email = jwtToken.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
+            var roles = jwtToken.Claims.FirstOrDefault(c => c.Type == "realm_access")?.Value;
 
             var userInfo = new
             {
                 Username = username,
-                Email = "",
-                Roles = ""
+                Name = name,
+                Email = email,
+                Roles = roles,
+                AllClaims = allClaims // Include all claims for debugging
             };
 
             return Ok(userInfo);

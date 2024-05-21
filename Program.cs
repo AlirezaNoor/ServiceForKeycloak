@@ -38,7 +38,8 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("profile");
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            NameClaimType = "name"
+            NameClaimType = "name",
+            RoleClaimType = "roles"
         };
 
         // غیرفعال کردن الزام HTTPS برای محیط توسعه

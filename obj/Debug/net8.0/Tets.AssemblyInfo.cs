@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tets")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+341d6d354b4ed0f826d26db8047d627f3e589609")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39dcd7c54a04b2e3df77107d592382279029c920")]
 [assembly: System.Reflection.AssemblyProductAttribute("Tets")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Tets")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

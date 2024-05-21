@@ -38,3 +38,6 @@
 /home/alireza/RiderProjects/Tets/Tets/obj/Debug/net8.0/Tets.pdb
 /home/alireza/RiderProjects/Tets/Tets/obj/Debug/net8.0/Tets.genruntimeconfig.cache
 /home/alireza/RiderProjects/Tets/Tets/obj/Debug/net8.0/ref/Tets.dll
+/home/alireza/RiderProjects/Tets/Tets/bin/Debug/net8.0/IdentityModel.dll
+/home/alireza/RiderProjects/Tets/Tets/obj/Debug/net8.0/Tets.sourcelink.json
+/home/alireza/RiderProjects/Tets/Tets/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.OpenIdConnect.dll

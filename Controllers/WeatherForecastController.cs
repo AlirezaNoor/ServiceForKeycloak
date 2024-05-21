@@ -21,7 +21,7 @@ public class WeatherForecastController : ControllerBase
 
  
     [HttpGet]
-    [Authorize]
+    
     [Route("test")]
     public IActionResult GetAll()
     {

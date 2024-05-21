@@ -29,8 +29,8 @@ builder.Services.AddAuthentication(options =>
     .AddCookie()
     .AddOpenIdConnect(options =>
     {
-        options.Authority = "http://localhost:8080/auth/realms/master"; // Replace with your Keycloak realm URL
-        options.ClientId = "your-client-id"; // Replace with your Keycloak client ID
+        options.Authority = "http://localhost:8080/auth/realms/master"; // آدرس Keycloak
+        options.ClientId = "postman-client"; // کلاینت ID
         options.ResponseType = OpenIdConnectResponseType.Code;
         options.SaveTokens = true;
         options.GetClaimsFromUserInfoEndpoint = true;
@@ -40,9 +40,12 @@ builder.Services.AddAuthentication(options =>
         {
             NameClaimType = "name"
         };
-        options.RequireHttpsMetadata = false;
 
+        // غیرفعال کردن الزام HTTPS برای محیط توسعه
+        options.RequireHttpsMetadata = false;
     });
+
+ 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

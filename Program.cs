@@ -1,8 +1,11 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,31 +24,17 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });;
 
-builder.Services.AddAuthentication(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
     {
-        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-    })
-    .AddCookie()
-    .AddOpenIdConnect(options =>
-    {
-        options.Authority = "http://localhost:8080/auth/realms/master"; // آدرس Keycloak
-        options.ClientId = "postman-client"; // کلاینت ID
-        options.ResponseType = OpenIdConnectResponseType.Code;
-        options.SaveTokens = true;
-        options.GetClaimsFromUserInfoEndpoint = true;
-        options.Scope.Add("openid");
-        options.Scope.Add("profile");
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            NameClaimType = "name",
-            RoleClaimType = "roles"
-        };
-
-        // غیرفعال کردن الزام HTTPS برای محیط توسعه
-        options.RequireHttpsMetadata = false;
+        options.Authority = "http://localhost:8080/realms/master"; // your keycloak address
+        options.Audience = "SH";
+        options.RequireHttpsMetadata = false; // For testing, you might want to set this to true in production
     });
-
+builder.Services.AddAuthorization();
+builder.Services.AddSwaggerGen();
+ 
+ 
  
 var app = builder.Build();
 
@@ -53,7 +42,16 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(_ =>
+    {
+        _.SwaggerEndpoint("/swagger/v1/swagger.json", "Codex API v1");
+        _.DocExpansion(DocExpansion.List);
+        _.EnableDeepLinking();
+
+        // Enable OAuth2 authorization support in Swagger UI
+        _.OAuthClientId("SH");
+        _.OAuthAppName("Swagger");
+    });
 }
 
 app.UseHttpsRedirection();

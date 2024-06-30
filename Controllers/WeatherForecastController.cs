@@ -42,9 +42,9 @@ public class WeatherForecastController : ControllerBase
         var validationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("YourSecretKey")),
             ValidateIssuer = false,
             ValidateAudience = false
+            
         };
 
         try
